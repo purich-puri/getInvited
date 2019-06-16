@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatService } from 'src/app/services/chat.service';
+import { Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-start-chat',
@@ -7,9 +10,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StartChatPage implements OnInit {
 
-  constructor() { }
+  users = [];
+  title = '';
+  participant = '';
+
+  constructor(
+    private chatService: ChatService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
+  }
+
+  addUser(){
+    let observe =  this.chatService.findUser(this.participant );
+
+    forkJoin(observe).subscribe( res => {
+      console.log('res: ', res);
+      for (let data of res){
+        if (data.length > 0){
+          console.log('data: ', data);
+          this.users.push(data[0]);
+        }
+      }
+       this.participant = '';
+    });
+  }
+
+  createGroup(){
+    this.chatService.createGroup(this.title, this.users)
+    .then( res => {
+       this.router.navigate(['/chats']);
+    })
   }
 
 }
