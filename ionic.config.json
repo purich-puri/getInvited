@@ -1,5 +1,7 @@
 {
   "name": "getInvited",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
