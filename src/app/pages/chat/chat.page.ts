@@ -3,7 +3,7 @@ import { ChatService } from './../../services/chat.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonContent } from '@ionic/angular';
+import { IonContent, Platform } from '@ionic/angular';
 import { map, tap } from 'rxjs/operators';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
@@ -28,8 +28,11 @@ export class ChatPage implements OnInit {
     private authService: AuthService, 
     private chatService: ChatService, 
     private router: Router,
-    private camera: Camera
+    private camera: Camera,
+    private platform: Platform
     ) { }
+
+    public isMobileDevice = this.platform.is('mobile');
 
   ngOnInit() {
     this.route.params.subscribe(data => {
