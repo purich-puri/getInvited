@@ -3,10 +3,19 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/chats"></ion-back-button>
     </ion-buttons>
-    <ion-title>profile</ion-title>
+    <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-
+  
+<ion-content padding>
+  <ion-list>
+    <ion-item> 
+      <ion-input placeholder="Nickname" [(ngModel)]="nickname"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" (click)="updateUser()">Update User</ion-button>
 </ion-content>
+
+<ion-footer>
+    <ion-button expand="block" color="danger" (click)="logOut()">SIGNOUT</ion-button>
+</ion-footer>

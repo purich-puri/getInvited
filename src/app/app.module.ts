@@ -18,6 +18,15 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { Camera } from '@ionic-native/camera/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
 
+/*
+class CameraMock {
+  getPictures(options){
+    return new Promise (( resolve, reject) => {
+      resolve('');
+    });
+}
+*/
+
 
 @NgModule({
   declarations: [AppComponent],

@@ -80,4 +80,31 @@ export class ChatPage implements OnInit {
     });
   }
 
+  sendFile(){
+    const options: CameraOptions = {
+      quality: 70,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      correctOrientation: true
+    }
+
+    this.camera.getPicture(options)
+    .then(data => {
+      let obj = this.chatService.addFileMessage(data, this.chat.id);
+      let task = obj.task;
+      
+
+      task.then( res => {
+        obj.ref.getDownloadURL().subscribe( url => {
+          this.chatService.saveFileMessage(url, this.chat.id);
+        })
+      });
+
+      task.percentageChanges().subscribe( change => {
+        console.log('change: ', change);
+      })
+    });
+  }
 }
